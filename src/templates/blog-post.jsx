@@ -1,9 +1,29 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import styled from '@emotion/styled';
 
 import { Bio, Layout, SEO } from '../components';
 import { rhythm, scale } from '../utils/typography';
+
+const publishDateScale = scale(-1 / 5);
+const PublishDate = styled.p`
+  font-size: ${publishDateScale.fontSize};
+  line-height: ${publishDateScale.lineHeight};
+  margin: ${rhythm(1)} 0;
+`;
+
+const Line = styled.hr`
+  margin-bottom: ${rhythm(1)};
+`;
+
+const LinkList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+`;
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -14,34 +34,18 @@ class BlogPostTemplate extends React.Component {
     return (
       <Layout location={this.props.location} {...siteMetadata}>
         <SEO title={post.title} description={post.description} />
+
         <h1>{post.title}</h1>
-        <p
-          style={{
-            ...scale(-1 / 5),
-            display: `block`,
-            marginBottom: rhythm(1),
-            marginTop: rhythm(-1),
-          }}
-        >
-          {post.publishDate}
-        </p>
+
+        <PublishDate>{post.publishDate}</PublishDate>
+
         {documentToReactComponents(post.body.json)}
-        <hr
-          style={{
-            marginBottom: rhythm(1),
-          }}
-        />
+
+        <Line />
+
         <Bio />
 
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
+        <LinkList>
           <li>
             {previous && (
               <Link to={previous.slug} rel="prev">
@@ -56,7 +60,7 @@ class BlogPostTemplate extends React.Component {
               </Link>
             )}
           </li>
-        </ul>
+        </LinkList>
       </Layout>
     );
   }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import Image from 'gatsby-image';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 
 import { rhythm } from '../utils/typography';
 
@@ -23,34 +25,37 @@ const bioQuery = graphql`
     }
   }
 `;
+
+const BioContainer = styled.div`
+  margin-bottom: ${rhythm(2.5)};
+  display: flex;
+`;
+
+const avatarStyle = css`
+  margin-right: ${rhythm(1 / 2)};
+  margin-bottom: 0;
+  min-width: 50px;
+  border-radius: 100%;
+`;
+
 const Bio = ({ site, avatar }) => {
   const { author, social } = site.siteMetadata;
   return (
-    <div
-      style={{
-        display: `flex`,
-        marginBottom: rhythm(2.5),
-      }}
-    >
+    <BioContainer>
       <Image
         fixed={avatar.childImageSharp.fixed}
         alt={author}
-        style={{
-          marginRight: rhythm(1 / 2),
-          marginBottom: 0,
-          minWidth: 50,
-          borderRadius: `100%`,
-        }}
+        css={avatarStyle}
         imgStyle={{
           borderRadius: `50%`,
         }}
       />
       <p>
         Written by <strong>{author}</strong> who lives in beautiful
-        Saint-Petersburg. You should follow him on{` `}
-        <a href={`https://twitter.com/${social.twitter}`}>Twitter</a>
+        Saint-Petersburg. Wanna follow him on{` `}
+        <a href={`https://twitter.com/${social.twitter}`}>Twitter</a>?
       </p>
-    </div>
+    </BioContainer>
   );
 };
 

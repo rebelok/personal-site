@@ -24,6 +24,7 @@ const ContactPage = ({ location }) => {
 
   const siteMetadata = data.site.siteMetadata;
   const { email, twitter, linkedIn } = siteMetadata.social;
+
   return (
     <Layout location={location} {...siteMetadata}>
       <h1>Contacts</h1>

@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
+import styled from '@emotion/styled';
 
 import { Layout, SEO } from '../components';
 import { rhythm } from '../utils/typography';
+
+const PostHeader = styled.h3`
+  margin-bottom: ${rhythm(1 / 4)};
+`;
 
 class BlogIndex extends React.Component {
   render() {
@@ -18,13 +23,9 @@ class BlogIndex extends React.Component {
           const title = node.title || node.slug;
           return (
             <div key={node.slug}>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
+              <PostHeader>
                 <Link to={node.slug}>{title}</Link>
-              </h3>
+              </PostHeader>
               <small>{node.publishedDate}</small>
               <p>{node.description}</p>
             </div>
